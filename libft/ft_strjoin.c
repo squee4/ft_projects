@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 13:29:51 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/04/24 17:13:36 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:20:14 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*ret;
 	int		i;
 	int		j;
-	int		newlen;
 
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	i = 0;
-	newlen = 0;
-	while (s1[i++])
-		newlen++;
-	i = 0;
-	while (s2[i++])
-		newlen++;
-	ret = (char *)malloc(sizeof(char) * (newlen + 1));
-	i = -1;
-	j = -1;
-	if (!ret)
-		return (0);
-	while (s1[++i])
+	j = 0;
+	if (ret == 0)
+		return (ret);
+	while (s1[i] != 0)
+	{
 		ret[i] = s1[i];
-	while (s2[++j])
+		i++;
+	}
+	while (s2[j] != 0)
+	{
 		ret[i + j] = s2[j];
+		j++;
+	}
 	ret[i + j] = 0;
 	return (ret);
 }

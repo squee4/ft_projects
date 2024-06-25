@@ -6,12 +6,14 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/03/10 22:24:10 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/06/25 16:29:19 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	:= pipex.a
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code
+NAME	:= pipex
+CFLAGS	:= -Wextra -Wall -Werror \
+	-Wunreachable-code \
+	-g -fsanitize=address,undefined
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
