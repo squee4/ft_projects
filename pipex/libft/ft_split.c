@@ -6,13 +6,13 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:42:38 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/04/29 18:46:07 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:55:33 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	words(char const *s, char c)
+int	words(char const *s, char c)
 {
 	int	w_count;
 	int	i;
