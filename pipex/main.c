@@ -13,7 +13,7 @@
 #include "libft/libft.h"
 #include "pipex.h"
 
-int	ft_append_str(char **ptr, char *str)
+char	**ft_append_str(char **ptr, char *str)
 {
 	char	**tmp;
 	int		i;
@@ -21,6 +21,16 @@ int	ft_append_str(char **ptr, char *str)
 	i = 0;
 	while (ptr[i])
 		i++;
+	tmp = malloc(sizeof(char *) * i + 2);
+	i = 0;
+	while (ptr[i])
+	{
+		tmp[i] = ft_strdup(ptr[i]);
+		i++;
+	}
+	tmp[i++] = ft_strdup(str);
+	tmp[i] = NULL;
+	return (tmp);
 }
 
 void	ft_parent_proc(t_data *data, char **envp)
@@ -31,13 +41,13 @@ void	ft_parent_proc(t_data *data, char **envp)
 	dup2(data->fd_out, STDOUT_FILENO);
 	close(data->fd_out);
 	if (ft_strchr(data->cmd2, '/') && access(data->cmd2, F_OK) == -1)
-		ft_error_handler("File or directory does not exist\n", data, 1, 1);
+		ft_error_handler("File or directory does not exist\n", data);
 	else if (!ft_strchr(data->cmd2, '/') && access(data->cmd2, F_OK) == -1)
-		ft_error_handler("Command not found\n", data, 1, 1);
+		ft_error_handler("Command not found\n", data);
 	if (access(data->cmd2, X_OK) == -1)
-		ft_error_handler("No execution permission", data, 1, 1);
+		ft_error_handler("No execution permission", data);
 	execve(data->cmd2, data->args2, envp);
-	ft_error_handler("ERROR. Command not executed!\n", data, 1, 1);
+	ft_error_handler("ERROR. Command not executed!\n", data);
 }
 
 void	ft_child_proc(t_data *data, char **envp)
@@ -48,22 +58,22 @@ void	ft_child_proc(t_data *data, char **envp)
 	dup2(data->tube[1], STDOUT_FILENO);
 	close(data->tube[1]);
 	if (ft_strchr(data->cmd1, '/') && access(data->cmd1, F_OK) == -1)
-		ft_error_handler("Such file or directory does not exist\n", data, 1, 1);
+		ft_error_handler("Such file or directory does not exist\n", data);
 	else if (!ft_strchr(data->cmd1, '/') && access(data->cmd1, F_OK) == -1)
-		ft_error_handler("Command not found\n", data, 1, 1);
+		ft_error_handler("Command not found\n", data);
 	if (access(data->cmd1, X_OK) == -1)
-		ft_error_handler("No execution permission", data, 1, 1);
+		ft_error_handler("No execution permission", data);
 	execve(data->cmd1, data->args1, envp);
-	ft_error_handler("ERROR. Command not executed!\n", data, 1, 1);
+	ft_error_handler("ERROR. Command not executed!\n", data);
 }
 
 void	ft_pipex(t_data *data, char **envp)
 {
 	if (pipe(data->tube) == -1)
-		ft_error_handler("Pipe error", data, 1, 1);
+		ft_error_handler("Pipe error", data);
 	data->child = fork();
 	if (data->child == -1)
-		ft_error_handler("Fork error", data, 1, 1);
+		ft_error_handler("Fork error", data);
 	if (data->child == 0)
 		ft_child_proc(data, envp);
 	else
@@ -83,11 +93,11 @@ int	main(int argc, char **argv, char **envp)
 		{
 			close(data.fd_in);
 			close(data.fd_out);
-			ft_error_handler("File error\n", &data, 1, 1);
+			ft_error_handler("File error\n", &data);
 		}
 		
 		if (ft_fill_data(&data, argv, envp))
-			ft_error_handler("No commands given\n", &data, 1, 1);
+			ft_error_handler("No commands given\n", &data);
 		ft_pipex(&data, envp);
 	}
 	else

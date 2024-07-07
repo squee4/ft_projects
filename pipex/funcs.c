@@ -13,16 +13,13 @@
 #include "libft/libft.h"
 #include "pipex.h"
 
-void	ft_error_handler(char *message, t_data *data, int child, int parent)
+void	ft_error_handler(char *message, t_data *data)
 {
 	int	msg_len;
 
 	msg_len = ft_strlen(message);
 	write(2, message, msg_len);
-	if (child)
-		ft_free_stuff(0, data, 1, 0);
-	if (parent)
-		ft_free_stuff(0, data, 0, 1);
+	ft_free_stuff(0, data);
 	exit(EXIT_FAILURE);
 }
 
@@ -43,7 +40,7 @@ int	ft_fill_data(t_data *data, char **argv, char **envp)
 	return (0);
 }
 
-void	ft_free_stuff(char **ptr, t_data *data, int	child, int parent)
+void	ft_free_stuff(char **ptr, t_data *data)
 {
 	int	i;
 
@@ -54,15 +51,12 @@ void	ft_free_stuff(char **ptr, t_data *data, int	child, int parent)
 			free(ptr[i++]);
 		free(ptr);
 	}
-	if (child)
+	else
 	{
 		if (data->args1)
 			free(data->args1);
 		if (data->cmd1)
 			free(data->cmd1);
-	}
-	if (parent)
-	{
 		if (data->cmd2)
 			free(data->cmd2);
 		if (data->args2)
@@ -72,16 +66,23 @@ void	ft_free_stuff(char **ptr, t_data *data, int	child, int parent)
 
 char	**ft_get_args(char *str)
 {
-	char	**aux;
+	char	**ret;
 	char	**mainarg;
-	int		i;
-	
+	char	**aux;
+
 	if (!str)
 		return (ft_calloc(1, sizeof(char **)));
-	i = 0;
-	aux = ft_split(str, '\'');
-	mainarg = ft_split(aux[0], ' ');	
-	return (aux);
+	if (ft_strchr(str, '\''))
+	{
+		aux = ft_split(str, '\'');
+		mainarg = ft_split(aux[0], ' ');
+		ret = ft_append_str(mainarg, aux[1]);
+		ft_free_stuff(aux, 0, 0, 0);
+		ft_free_stuff(mainarg, 0, 0, 0);
+	}
+	else
+		ret = ft_split(aux[0], ' ');
+	return (ret);
 }
 
 char	*ft_get_cmd(char **args, char **envp)

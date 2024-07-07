@@ -29,13 +29,13 @@ typedef struct s_data
 }	t_data;
 
 int		ft_fill_data(t_data *data, char **argv, char **envp);
-void	ft_free_stuff(char **ptr, t_data *data, int	child, int parent);
+void	ft_free_stuff(char **ptr, t_data *data);
 char	**ft_get_args(char *str);
 char	*ft_get_cmd(char **cmd, char **envp);
 void	ft_pipex(t_data *data, char **envp);
 void	ft_child_proc(t_data *data, char **envp);
 void	ft_parent_proc(t_data *data, char **envp);
-void	ft_error_handler(char *message,t_data *data, int child, int parent);
-int		ft_is_all_space(char *str);
+void	ft_error_handler(char *message,t_data *data);
+char	**ft_append_str(char **ptr, char *str);
 
 #endif
