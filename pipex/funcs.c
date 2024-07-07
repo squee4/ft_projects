@@ -6,14 +6,14 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:22:50 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/02 21:02:49 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/07 19:09:25 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "pipex.h"
 
-void	ft_error_handler(char *message, int child, int parent, t_data *data)
+void	ft_error_handler(char *message, t_data *data, int child, int parent)
 {
 	int	msg_len;
 
@@ -28,23 +28,17 @@ void	ft_error_handler(char *message, int child, int parent, t_data *data)
 
 int	ft_fill_data(t_data *data, char **argv, char **envp)
 {
-	data->args1 = ft_get_args(argv[2], data);
-	/* if (data->args1 && data->args1[1] && !ft_strncmp(data->args1[1], "spc", 3))
+	data->args1 = ft_get_args(argv[2]);
+	if (*data->args1 != NULL && ft_strchr(*data->args1, '/'))
 		data->cmd1 = data->args1[0];
-	else  */
-	if (data->args1 && *data->args1 && ft_strchr(*data->args1, '/'))
-		data->cmd1 = data->args1[0];
-	else
-		data->cmd1 = ft_get_path(data->args1, envp);
-	data->args2 = ft_get_args(argv[3], data);
-	/* if (data->args2 && data->args2[1] && !ft_strncmp(data->args2[1], "spc", 3))
+	else if (*data->args1 != NULL)
+		data->cmd1 = ft_get_cmd(data->args1, envp);
+	data->args2 = ft_get_args(argv[3]);
+	if (*data->args2 != NULL && ft_strchr(*data->args2, '/'))
 		data->cmd2 = data->args2[0];
-	else  */
-	if (data->args2 && *data->args2 && ft_strchr(*data->args2, '/'))
-		data->cmd2 = data->args2[0];
-	else
-		data->cmd2 = ft_get_path(data->args2, envp);
-	if (!*data->args1 && !*data->args2)
+	else if (*data->args2 != NULL)
+		data->cmd2 = ft_get_cmd(data->args2, envp);
+	if (*data->args1 == NULL && *data->args2 == NULL)
 		return (1);
 	return (0);
 }
@@ -60,58 +54,45 @@ void	ft_free_stuff(char **ptr, t_data *data, int	child, int parent)
 			free(ptr[i++]);
 		free(ptr);
 	}
-	else
+	if (child)
 	{
-		if (child)
-		{
-			if (data->args1)
-				free(data->args1);
-			if (data->cmd1)
-				free(data->cmd1);
-		}
-		if (parent)
-		{
-			if (data->cmd2)
-				free(data->cmd2);
-			if (data->args2)
-				free(data->args2);
-		}
+		if (data->args1)
+			free(data->args1);
+		if (data->cmd1)
+			free(data->cmd1);
+	}
+	if (parent)
+	{
+		if (data->cmd2)
+			free(data->cmd2);
+		if (data->args2)
+			free(data->args2);
 	}
 }
 
-char	**ft_get_args(char *str, t_data *data)
+char	**ft_get_args(char *str)
 {
 	char	**aux;
+	char	**mainarg;
 	int		i;
 	
 	if (!str)
 		return (ft_calloc(1, sizeof(char **)));
-	if (ft_is_all_space(str))
-	{
-		aux = ft_calloc(2, sizeof(char *));
-		aux[0] = ft_strdup(str);
-		return (aux);
-	}
-	i = 1;
-	aux = ft_split(str, ' ');
-	while (aux[i])
-	{
-		if (aux[i][0] != '-')
-			return (ft_free_stuff(aux, 0, 0, 0), ft_calloc(1, sizeof(char **)));
-		i++;
-	}
+	i = 0;
+	aux = ft_split(str, '\'');
+	mainarg = ft_split(aux[0], ' ');	
 	return (aux);
 }
 
-char	*ft_get_path(char **cmd, char **envp)
+char	*ft_get_cmd(char **args, char **envp)
 {
 	int		i;
 	char	**paths;
 	char	*tmp;
 	char	*ret;
 
-	if (cmd[0] == "")
-		return (ft_strdup_(""));
+	if (args[0][0] == 0)
+		return (NULL);
 	i = -1;
 	while (envp[++i])
 	{
@@ -122,13 +103,9 @@ char	*ft_get_path(char **cmd, char **envp)
 	while (paths[++i])
 	{
 		tmp = ft_strjoin(paths[i], "/");
-		if (cmd[0])
-			ret = ft_strjoin(tmp, cmd[0]);
-		free(tmp);
+		ret = ft_strjoin(tmp, args[0]);
 		if (access(ret, X_OK) == 0)
-			return (ft_free_stuff(paths, 0, 0, 0), ret);
+			return (free(tmp), ft_free_stuff(paths, 0, 0, 0), ret);
 	}
-	if (ret)
-		free(ret);
-	return (ft_free_stuff(paths, 0, 0, 0), NULL);
+	return (free(ret), ft_free_stuff(paths, 0, 0, 0), NULL);
 }
