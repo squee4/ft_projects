@@ -6,7 +6,7 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/03/10 22:24:10 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/07/16 21:24:02 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS	:= -I$(LIBFT) -I$(MLX)
 MLX_FLAGS	:= -ldl -pthread -lm
-SRCS	:= main_solong.c
+SRCS	:= main_solong.c \
+	GNL/get_next_line.c GNL/get_next_line_utils.c  src/parseo.c \
 
 OBJS	:= ${SRCS:.c=.o}
 

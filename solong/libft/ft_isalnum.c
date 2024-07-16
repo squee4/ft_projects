@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:37:06 by ijerruz-          #+#    #+#             */
-/*   Updated: 2023/11/30 14:18:57 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:13:32 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,5 @@
 
 int	ft_isalnum(int c)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	return (0);
+	return ((c > 64 && c < 91) || (c > 96 && c < 123) || (c > 47 && c < 58));
 }
-/* 
-int main(void)
-{
-	char letra;
-
-	letra = 'a';
-	printf("%d", ft_isalnum(letra));
-	return (0);
-} */

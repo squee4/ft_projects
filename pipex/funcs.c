@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:22:50 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/07 19:09:25 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/11 02:25:20 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,90 +23,33 @@ void	ft_error_handler(char *message, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-int	ft_fill_data(t_data *data, char **argv, char **envp)
+void	ft_check_perms(t_data *data)
 {
-	data->args1 = ft_get_args(argv[2]);
-	if (*data->args1 != NULL && ft_strchr(*data->args1, '/'))
-		data->cmd1 = data->args1[0];
-	else if (*data->args1 != NULL)
-		data->cmd1 = ft_get_cmd(data->args1, envp);
-	data->args2 = ft_get_args(argv[3]);
-	if (*data->args2 != NULL && ft_strchr(*data->args2, '/'))
-		data->cmd2 = data->args2[0];
-	else if (*data->args2 != NULL)
-		data->cmd2 = ft_get_cmd(data->args2, envp);
-	if (*data->args1 == NULL && *data->args2 == NULL)
-		return (1);
-	return (0);
+	if (data->cmd && ft_strchr(data->cmd, '/') && access(data->cmd, F_OK) == -1)
+		ft_error_handler("Such file or directory does not exist\n", data);
+	else if (data->cmd && !ft_strchr(data->cmd, '/')
+		&& access(data->cmd, F_OK) == -1)
+		ft_error_handler("Command not found\n", data);
+	if (data->cmd && access(data->cmd, X_OK) == -1)
+		ft_error_handler("No execution permission", data);
 }
 
-void	ft_free_stuff(char **ptr, t_data *data)
+void	ft_arrange_pipes(t_data *data, int mode)
 {
-	int	i;
-
-	i = 0;
-	if (ptr)
+	if (mode == 1)
 	{
-		while (ptr[i])
-			free(ptr[i++]);
-		free(ptr);
+		close(data->tube[0]);
+		dup2(data->fd_in, STDIN_FILENO);
+		close(data->fd_in);
+		dup2(data->tube[1], STDOUT_FILENO);
+		close(data->tube[1]);
 	}
-	else
+	else if (mode == 2)
 	{
-		if (data->args1)
-			free(data->args1);
-		if (data->cmd1)
-			free(data->cmd1);
-		if (data->cmd2)
-			free(data->cmd2);
-		if (data->args2)
-			free(data->args2);
+		close(data->tube[1]);
+		dup2(data->tube[0], STDIN_FILENO);
+		close(data->tube[0]);
+		dup2(data->fd_out, STDOUT_FILENO);
+		close(data->fd_out);
 	}
-}
-
-char	**ft_get_args(char *str)
-{
-	char	**ret;
-	char	**mainarg;
-	char	**aux;
-
-	if (!str)
-		return (ft_calloc(1, sizeof(char **)));
-	if (ft_strchr(str, '\''))
-	{
-		aux = ft_split(str, '\'');
-		mainarg = ft_split(aux[0], ' ');
-		ret = ft_append_str(mainarg, aux[1]);
-		ft_free_stuff(aux, 0, 0, 0);
-		ft_free_stuff(mainarg, 0, 0, 0);
-	}
-	else
-		ret = ft_split(aux[0], ' ');
-	return (ret);
-}
-
-char	*ft_get_cmd(char **args, char **envp)
-{
-	int		i;
-	char	**paths;
-	char	*tmp;
-	char	*ret;
-
-	if (args[0][0] == 0)
-		return (NULL);
-	i = -1;
-	while (envp[++i])
-	{
-		if (!ft_strncmp(envp[i], "PATH=", 5))
-			paths = ft_split(&envp[i][5], ':');
-	}
-	i = -1;
-	while (paths[++i])
-	{
-		tmp = ft_strjoin(paths[i], "/");
-		ret = ft_strjoin(tmp, args[0]);
-		if (access(ret, X_OK) == 0)
-			return (free(tmp), ft_free_stuff(paths, 0, 0, 0), ret);
-	}
-	return (free(ret), ft_free_stuff(paths, 0, 0, 0), NULL);
 }

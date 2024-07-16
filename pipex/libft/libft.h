@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:14:50 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/02 17:56:20 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:54:51 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 int		words(char const *s, char c);
+void	ft_free_double(char **ptr);
 
 typedef struct s_list
 {

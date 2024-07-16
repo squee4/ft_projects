@@ -6,14 +6,14 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 11:10:26 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/09 20:30:27 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/16 21:21:10 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 7
+#  define BUFFER_SIZE 1
 # endif
 
 # include <fcntl.h>

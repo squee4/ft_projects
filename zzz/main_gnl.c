@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 	int fd;
 	int	iters;
 	
-	fd = open("awebo.txt", O_RDONLY);
+	fd = open("prueba.txt", O_RDONLY);
 	iters = 0;
 	if (argc == 1)
 		printf("Introdusí un valor we");
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 	{
 		while (iters < ft_atoi(argv[1]))
 		{
+			printf("%s", get_next_line(fd));
 			printf("%s", get_next_line(fd));
 			iters++;
 		}

@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 17:33:33 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/01/23 23:25:45 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:13:14 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_itoa(int n)
 	reverse(num);
 	return (num);
 }
-/* 
+/*
 int	main(void)
 {
 	printf("%s\n", ft_itoa(-123456));

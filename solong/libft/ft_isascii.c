@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:45:49 by ijerruz-          #+#    #+#             */
-/*   Updated: 2023/11/30 14:19:05 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:16:45 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,5 @@
 
 int	ft_isascii(int c)
 {
-	if ((c >= 0 && c < 128))
-		return (1);
-	return (0);
+	return (c >= 0 && c < 128);
 }
-
-/*
-int main(void)
-{
-    char letra;
-
-    letra = '5';
-    printf("%d", ft_isascii(letra));
-    return (0);
-}*/

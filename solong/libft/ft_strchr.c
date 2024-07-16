@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:24:21 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/02/16 18:18:27 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:08:29 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&s[i]);
 	return (NULL);
 }
-/* 
-int	main(void)
-{
-	printf("%s", ft_strchr("holaalaalaa", 'l'));
-	return (0);
-} */

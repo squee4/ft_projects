@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:45:53 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/01/15 14:21:10 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:47:21 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int	beg;
 	int	end;
 
-	beg = 0;
-	end = ft_strlen(s1);
 	if (!s1)
 		return (0);
 	if (!set)
 		return ((char *)s1);
-	while (s1[beg] != 0 && contains(set, s1[beg]))
+	beg = 0;
+	end = 0;
+	while (s1[end])
+		end++;
+	while (s1[beg] && contains(set, s1[beg]))
 		beg++;
 	if (beg == end)
 		return (ft_strdup(""));

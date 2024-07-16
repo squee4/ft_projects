@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:26:20 by ijerruz-          #+#    #+#             */
-/*   Updated: 2023/11/30 14:19:47 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:38:01 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-/*
-int	main(void)
-{
-	printf("%d", ft_strlen("holaaaa"));
-	return (0);
-}*/

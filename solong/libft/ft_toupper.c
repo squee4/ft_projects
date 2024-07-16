@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:23:17 by ijerruz-          #+#    #+#             */
-/*   Updated: 2023/11/30 14:20:37 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:27:01 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ int	ft_toupper(int c)
 	return (c);
 }
 
-/*
+/* 
 int main(void)
 {
     char letra;
 
     letra = 'a';
     printf("%d", ft_toupper(letra));
+	ft_isalpha(letra);
     return (0);
-}*/
+} */

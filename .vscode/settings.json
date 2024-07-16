@@ -1,5 +1,9 @@
 {
 	"editor.insertSpaces": false,
 	"files.autoSave": "afterDelay",
-	"github.copilot.editor.enableAutoCompletions": false
+	"github.copilot.editor.enableAutoCompletions": false,
+	"files.associations": {
+		"pipex.h": "c",
+		"libft.h": "c"
+	}
 }

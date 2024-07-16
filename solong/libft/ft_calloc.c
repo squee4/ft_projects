@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 21:02:32 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/02/09 01:42:32 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:55:11 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	*ft_calloc(size_t count, size_t size)
 
 	i = 0;
 	ret = malloc(count * size);
-	if (ret == 0)
-		return (ret);
+	if (!ret)
+		return (0);
 	while (i < (count * size))
 	{
-		ret[i] = '\0';
+		((char *)ret)[i] = 0;
 		i++;
 	}
 	return (ret);

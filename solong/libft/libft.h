@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 18:14:50 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/03/10 22:35:31 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:54:51 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <stdarg.h>
-
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -60,6 +57,9 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
+int		words(char const *s, char c);
+void	ft_free_double(char **ptr);
+
 typedef struct s_list
 {
 	void			*content;
@@ -75,15 +75,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
-int		ft_putchar(char c);
-int		ft_putstr(char *s);
-int		ft_check_base(char *base);
-int		ft_putnbr_base(long nbr, char *base, int base_size);
-int		ft_printf(char const *str, ...);
-int		ft_putnbr_unsigned(unsigned long nbr, char *base);
-
-char	*get_next_line(int fd);
-char	*ft_write(char *buffer, char *buf);
 
 #endif

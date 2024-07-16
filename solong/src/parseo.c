@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   parseo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 00:18:46 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/04/22 15:22:03 by ijerruz-         ###   ########.fr       */
+/*   Created: 2024/07/16 21:25:25 by ijerruz-          #+#    #+#             */
+/*   Updated: 2024/07/16 21:52:53 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../solong.h"
 
-char	*ft_strdup(const char *s1)
+int	map_is_square(char **map)
 {
-	char	*ret;
-	int		len;
+	int	i;
+	int j;
+	int	max;
 
-	len = 0;
-	while (s1[len])
-		len++;
-	ret = (char *)malloc((len + 1) * sizeof(char));
-	if (!ret)
-		return (0);
-	ft_memcpy(ret, s1, len);
-	ret[len] = '\0';
-	return (ret);
+	i = 0;
+	j = 0;
+	max = 0;
+	while (map[0][max])
+		max++;
+	while (map[i])
+	{
+		while (map[i][j])
+		{
+			if (j > max)
+				return (0);
+			j++;
+		}
+		if (i > max)
+			return (0);
+		i++;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:42:38 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/02 17:55:33 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:54:20 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	words(char const *s, char c)
 	return (w_count);
 }
 
-static void	ft_free_double(char **ptr)
+void	ft_free_double(char **ptr)
 {
 	int	i;
 

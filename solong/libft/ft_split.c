@@ -6,130 +6,71 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:42:38 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/01/29 13:06:57 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/08 23:54:20 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	words(char const *s, char c)
+int	words(char const *s, char c)
 {
-	int	w;
+	int	w_count;
 	int	i;
-	int	flag;
+	int	is_word;
 
-	w = 0;
+	w_count = 0;
 	i = 0;
-	flag = 1;
+	is_word = 1;
 	while (s[i])
 	{
 		if (s[i] == c)
-			flag = 1;
-		else if (s[i] != c && flag)
+			is_word = 1;
+		else if (s[i] != c && is_word)
 		{
-			flag = 0;
-			w++;
+			is_word = 0;
+			w_count++;
 		}
 		i++;
 	}
-	return (w);
+	return (w_count);
 }
 
-static int	*get_start(char const *s, char c)
+void	ft_free_double(char **ptr)
 {
-	int	*nums;
 	int	i;
-	int	n;
-	int	flag;
 
 	i = 0;
-	n = 0;
-	flag = 1;
-	nums = malloc((words(s, c) + 1) * sizeof(int));
-	if (!nums)
-		return (0);
-	while (s[i])
+	while (ptr[i])
 	{
-		if (s[i] == c)
-			flag = 1;
-		else if (s[i] != c && flag)
-		{
-			flag = 0;
-			nums[n] = i;
-			n++;
-		}
+		free(ptr[i]);
 		i++;
 	}
-	nums[n] = -1;
-	return (nums);
-}
-
-static size_t	ft_wordlen(const char *s, char sep)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != sep)
-		i++;
-	return (i);
-}
-
-static char	**reserva(int opt, int size)
-{
-	char	**ptr;
-
-	if (opt == 0)
-	{
-		ptr = malloc(sizeof(char *));
-		if (!ptr)
-			return (0);
-		ptr[0] = NULL;
-	}
-	else
-	{
-		ptr = malloc(sizeof(char *) * size);
-		if (!ptr)
-			return (0);
-	}
-	return (ptr);
+	free(ptr);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	int		i;
+	int		j;
+	int		put;
 	char	**ret;
-	int		*starts;
 
-	i = 0;
-	if (!words(s, c))
-		ret = reserva(0, words(s, c) + 1);
-	else
-		ret = reserva(1, words(s, c) + 1);
+	ret = (char **)malloc(sizeof(char *) * (words(s, c) + 1));
 	if (!ret)
-		return (NULL);
-	starts = get_start(s, c);
-	while (i < words(s, c))
+		return (0);
+	(free(0), put = 0, i = 0, j = 0);
+	while (put < words(s, c))
 	{
-		ret[i] = ft_substr(s, starts[i], ft_wordlen(&s[starts[i]], c));
-		i++;
+		while (s[i] == c)
+			i++;
+		j = i;
+		while (s[i] != 0 && s[i] != c)
+			i++;
+		ret[put] = ft_substr(s, j, i - j);
+		if (!ret[put])
+			return (ft_free_double(ret), NULL);
+		put++;
 	}
-	free(starts);
-	ret[i] = NULL;
+	ret[put] = NULL;
 	return (ret);
 }
-/* 
-int	main(void)
-{
-	//get_end("--hola----que--",'-');
-	//char	**pals = ft_split("aa---hola----que----tal----a-a--eb", '-');
-	char	**pals = ft_split("hello!", ' ');
-	while (*pals)
-	{
-		printf("%s\n", *pals);
-		//free(*pals);
-		pals++;
-	}
-	//free(pals);
-	
-	return (0);
-} */

@@ -6,7 +6,7 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/06/25 16:29:19 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/07/11 01:41:51 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS	:= -I$(LIBFT)
 
-SRC	:= main.c funcs.c
+SRC	:= main.c funcs.c parsing.c
 OBJS	:= ${SRC:.c=.o}
 
 all: libft $(NAME)

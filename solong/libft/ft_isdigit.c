@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:50:36 by ijerruz-          #+#    #+#             */
-/*   Updated: 2023/11/30 14:19:09 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:16:37 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,5 @@
 
 int	ft_isdigit(int c)
 {
-	if ((c > 47 && c < 58))
-		return (1);
-	return (0);
+	return (c > 47 && c < 58);
 }
-
-/*
-int main(void)
-{
-    char letra;
-
-    letra = '5';
-    printf("%d", ft_isdigit(letra));
-    return (0);
-}*/
