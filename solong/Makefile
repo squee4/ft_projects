@@ -6,37 +6,40 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/07/16 21:24:02 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/07/23 13:35:44 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	:= solong.a
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code
+NAME	:= so_long
+CFLAGS	:= -Wextra -Wall -Werror \
+	-Wunreachable-code -Ofast \
+	-g -fsanitize=address,undefined
+
 MLX_DIR = ./MLX42/build
-MLX		:= $(MLX_DIR)/libmlx42.a
+MLX		= $(MLX_DIR)/libmlx42.a
+LINK	= -ldl -lglfw -pthread -lm
+
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS	:= -I$(LIBFT) -I$(MLX)
-MLX_FLAGS	:= -ldl -pthread -lm
+
 SRCS	:= main_solong.c \
-	GNL/get_next_line.c GNL/get_next_line_utils.c  src/parseo.c \
+	GNL/get_next_line.c GNL/get_next_line_utils.c \
+	src/parsing.c src/map_check.c src/start_data.c src/open_window.c \
 
 OBJS	:= ${SRCS:.c=.o}
 
-all: libmlx libft $(NAME)
+all: libft $(NAME)
 
 libft:
 	@make -C $(LIBFT_DIR)
 
-libmlx:
-	@make -C $(MLX_DIR)
-
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(MLX) $(HEADERS) -lglfw -L /Users/$(USER)/.brew/opt/glfw/lib/ -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(HEADERS) $(LINK) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS)
@@ -46,6 +49,6 @@ fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf $(LIBFT)
 
-re: clean all
+re: fclean all
 
-.PHONY: all, clean, fclean, re, libmlx, libft
+.PHONY: all, clean, fclean, re, libft
