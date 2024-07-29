@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:25:25 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/23 16:24:20 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:28:38 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_error(char *message, t_data *data)
 	write(2, message, msg_len);
 	(void)data;
 	//ft_free_stuff(data);
+	ft_free_images(data);
 	exit(EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 03:56:43 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/23 14:32:23 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:58:59 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		data.map = ft_read_map(argv[1]);
 		if (ft_map_valid(&data, argv[1]))
 		{
-			ft_open_window(&data);			
+			ft_open_window(&data);
 		}
 		ft_free_double(data.map);
 	}

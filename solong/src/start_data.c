@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 05:43:04 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/23 16:33:10 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:11:27 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	ft_dimension_player(t_data *data)
 		i++;
 	}
 	data->height = i;
-	data->size = 150;
+	data->moves = 0;
+	data->size = 50;
 	//if (data->height < 10 || data->width < 20)
 	//	data->size = 128;
 }

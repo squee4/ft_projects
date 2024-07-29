@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 12:22:21 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/11 13:44:49 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:00:17 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	ft_pipex(t_data *data, char **argv, char **envp)
 		ft_first_proc(data, argv, envp);
 	else
 	{
-		waitpid(data->child, 0, 0);
 		data->child2 = fork();
 		if (data->child2 < 0)
 			ft_error_handler("Fork error", data);
 		if (data->child2 == 0)
 			ft_last_proc(data, argv, envp);
 	}
+	waitpid(data->child2, NULL, 0);
 }
 
 void	ft_last_proc(t_data *data, char **argv, char **envp)

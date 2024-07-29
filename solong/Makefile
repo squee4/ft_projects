@@ -6,14 +6,14 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/07/23 13:35:44 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/07/29 19:51:05 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= so_long
 CFLAGS	:= -Wextra -Wall -Werror \
 	-Wunreachable-code -Ofast \
-	-g -fsanitize=address,undefined
+	-g #-fsanitize=address,undefined
 
 MLX_DIR = ./MLX42/build
 MLX		= $(MLX_DIR)/libmlx42.a
@@ -27,6 +27,7 @@ HEADERS	:= -I$(LIBFT) -I$(MLX)
 SRCS	:= main_solong.c \
 	GNL/get_next_line.c GNL/get_next_line_utils.c \
 	src/parsing.c src/map_check.c src/start_data.c src/open_window.c \
+	src/images.c src/hooks.c\
 
 OBJS	:= ${SRCS:.c=.o}
 
