@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:21:33 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/29 19:41:20 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/31 04:29:33 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_draw_tile(char c, int x, int y, t_data *data)
 {
 	mlx_image_t	*img;
-
+	
 	if (c == '1')
 		img = data->images.wall;
 	if (c == '0')
@@ -45,7 +45,7 @@ void	ft_draw_map(t_data *data)
 			if (data->map[i][j] == '1')
 				ft_draw_tile('1', j * 50, i * 50, data);
 			else if (data->map[i][j] == 'E')
-				ft_draw_tile('1', j * 50, i * 50, data);
+				ft_draw_tile('E', j * 50, i * 50, data);
 			else
 				ft_draw_tile('0', j * 50, i * 50, data);
 			j++;
@@ -69,6 +69,32 @@ void	ft_draw_rest(t_data *data)
 			if (data->map[i][j] == 'P')
 				ft_draw_tile('P', j * 50, i * 50, data);
 			else if (data->map[i][j] == 'C')
+			{
+				ft_draw_tile('C', j * 50, i * 50, data);
+				data->coins++;
+			}	
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+void	ft_redraw_coins(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	data->coins--;
+	mlx_delete_image(data->window, data->images.coin);
+	data->images.coin = ft_load_image("./textures/coin.png", data);
+	while (data->map[i])
+	{
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'C')
 				ft_draw_tile('C', j * 50, i * 50, data);
 			j++;
 		}
@@ -90,6 +116,7 @@ void	ft_open_window(t_data *data)
 		ft_error("Error starting window", data);
 	ft_draw_map(data);
 	ft_draw_rest(data);
+	printptr(data->map);
 	mlx_key_hook(data->window, &my_keyhook, data);
 	mlx_loop(data->window);
 	mlx_terminate(data->window);

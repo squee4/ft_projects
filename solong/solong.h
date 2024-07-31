@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 21:18:27 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/07/29 20:11:21 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/07/31 04:06:08 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	int				height;
 	int				width;
 	int				moves;
+	int				coins;
 	int				size;
 	t_point			player;
 	t_images		images;
@@ -63,5 +64,11 @@ void		ft_draw_rest(t_data *data);
 void		ft_free_images(t_data *data);
 void		ft_start_images(t_data *data);
 void		my_keyhook(mlx_key_data_t keydata, void* param);
+void		printptr(char **ptr);
+void		ft_move_up(t_data *data);
+void		ft_move_left(t_data *data);
+void		ft_move_down(t_data *data);
+void		ft_move_right(t_data *data);
+void		ft_redraw_coins(t_data *data);
 
 #endif

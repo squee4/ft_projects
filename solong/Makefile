@@ -6,12 +6,12 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/07/29 19:51:05 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/07/31 03:27:48 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= so_long
-CFLAGS	:= -Wextra -Wall -Werror \
+CFLAGS	:=  -Wall -Werror -Wextra \
 	-Wunreachable-code -Ofast \
 	-g #-fsanitize=address,undefined
 
