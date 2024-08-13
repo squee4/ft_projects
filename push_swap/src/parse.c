@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:48:00 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/13 09:44:09 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/13 23:00:58 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_numeric_args(char **ptr)
 		if (ptr[i][j] == '+' || ptr[i][j] == '-')
 		{
 			j++;
-			if (!ptr[i][j])
+			if (ptr[i][j] == '<')
 				return (0);
 		}
 		while (ptr[i][j])

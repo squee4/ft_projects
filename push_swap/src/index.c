@@ -6,13 +6,13 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 01:29:24 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/13 09:47:34 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/13 22:27:29 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_swap(int *a, int *b, int *swp)
+void	ft_swap_num(int *a, int *b, int *swp)
 {
 	int	tmp;
 
@@ -41,7 +41,7 @@ void	ft_sort_num(t_data *data)
 		while (j < (len - i - 1))
 		{
 			if (list[j] > list[j + 1])
-				ft_swap(&list[j], &list[j + 1], &swap);
+				ft_swap_num(&list[j], &list[j + 1], &swap);
 			j++;
 		}
 		if (swap == 0)
@@ -50,23 +50,26 @@ void	ft_sort_num(t_data *data)
 	}
 }
 
-void	ft_index(t_data *data)
+void	ft_index(t_data *data, t_node **stack)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	t_node	*head;
 
 	i = 0;
 	j = 0;
+	head = *stack;
 	ft_sort_num(data);
-	while (data->nums[i])
+	while (j < data->count)
 	{
-		while (data->s_a[j])
+		while (*stack)
 		{
-			if (data->s_a[j]->value == data->nums[i])
-				data->s_a[j]->index = i;
-			j++;
+			if ((*stack)->value == data->nums[i])
+				(*stack)->index = i + 1;
+			*stack = (*stack)->next;
 		}
-		j = 0;
+		*stack = head;
 		i++;
+		j++;
 	}
 }

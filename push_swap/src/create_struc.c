@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:50 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/13 12:23:39 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:43:32 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_node	*ft_new_node(int value)
 	node->index = -1;
 	node->target = -1;
 	node->cost = -1;
+	node->pos = -1;
 	node->next = NULL;
 	return (node);
 }
@@ -35,14 +36,6 @@ void	ft_add_node_top(t_node **stack, t_node *new)
 
 void	ft_stack_a(t_node **stack, int *nums, int len)
 {
-	int		i;
-
-	i = len;
-	while (i >= 0)
-	{
-		ft_add_node_top(stack, ft_new_node(nums[i]));
-		if (i == len)
-			stack[0]->next = NULL;
-		i--;
-	}
+	while (len >= 0)
+		ft_add_node_top(stack, ft_new_node(nums[len--]));
 }
