@@ -6,7 +6,7 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/08/09 15:00:07 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/08/13 11:26:31 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS	:= -I$(LIBFT)
 
-SRCS	:= src/main.c src/parse.c \
+SRCS	:= src/main.c src/parse.c src/create_struc.c \
+			src/index.c \
+			src/print_funcs.c
 
 OBJS	:= ${SRCS:.c=.o}
 

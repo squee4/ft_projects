@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:48:00 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/09 23:46:10 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:44:09 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	*ft_convert(char **ptr)
 	int	j;
 	int	*nums;
 
-	i = 0;	
+	i = 0;
 	while (ptr[i])
 		i++;
 	nums = malloc(sizeof(int) * i);
@@ -87,7 +87,7 @@ int	ft_unique(int *nums)
 void	ft_fill(int *nums, int len)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < len)
 	{

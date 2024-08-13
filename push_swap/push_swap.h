@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 22:41:00 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/09 22:45:40 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:21:01 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,28 @@ typedef struct s_node
 	int				index;
 	int				target;
 	int				cost;
-	struct t_node	*next;
+	struct s_node	*next;
 } t_node;
+
+typedef struct s_data
+{
+	char	**arg;
+	int		*nums;
+	int		count;
+	t_node	**s_a;
+	t_node	**s_b;
+} t_data;
 
 int		ft_isnumeric(int c);
 int		ft_numeric_args(char **ptr);
 void	ft_fill(int *nums, int len);
 int		ft_unique(int *nums);
 int		*ft_convert(char **ptr);
+void	ft_stack_a(t_node **stack, int *nums, int len);
+void	ft_index(t_data *data);
+
+//debugging
+void	ft_print_values(t_node *list);
+void	ft_print_indexes(t_node *list);
 
 #endif
