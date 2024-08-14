@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 01:29:24 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/13 22:27:29 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:35:28 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_index(t_data *data, t_node **stack)
 		while (*stack)
 		{
 			if ((*stack)->value == data->nums[i])
-				(*stack)->index = i + 1;
+				(*stack)->index = i;
 			*stack = (*stack)->next;
 		}
 		*stack = head;
