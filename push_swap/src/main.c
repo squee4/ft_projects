@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 22:37:18 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/14 21:13:33 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:24:30 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,11 @@ int	main(int argc, char **argv)
 		data.count = argc - 1;
 	}
 	else
-	{
-		write(2, "Wrong argc\n", 11);
-		return (0);
-	}
-	printf("Numeric - %d.\n", ft_numeric_args(data.arg));
-	data.nums = ft_convert(data.arg);
-	printf("Unique - %d.\n", ft_unique(data.nums));
-	//ft_fill(data.nums, data.count);
-	ft_stack_a(&data.s_a, data.nums, data.count - 1);
+		ft_error("Wrong argc\n", &data);
+	if (ft_numeric_args(&data))
+		data.nums = ft_convert(&data);
+	if (ft_unique(&data))
+		ft_stack_a(&data);
 	ft_index(&data, &data.s_a);
 	ft_set_pos(&data.s_a);
 	//ft_print_values(data.s_a);
@@ -47,5 +43,6 @@ int	main(int argc, char **argv)
 	ft_print_values(data.s_a);
 	write(1, "stack b values\n", 15);
 	ft_print_values(data.s_b);
+	ft_error("fin del programa\n", &data);
 	return (0);
 }

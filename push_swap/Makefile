@@ -6,13 +6,13 @@
 #    By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 16:10:56 by ijerruz-          #+#    #+#              #
-#    Updated: 2024/08/14 18:23:49 by ijerruz-         ###   ########.fr        #
+#    Updated: 2024/08/21 16:32:45 by ijerruz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= push_swap
 CFLAGS	:=  -Wall -Werror -Wextra \
-	#-g -fsanitize=address,undefined \
+	-g -fsanitize=address,undefined \
 	#-Wunreachable-code -Ofast 
 
 LIBFT_DIR = ./libft
@@ -22,7 +22,7 @@ HEADERS	:= -I$(LIBFT)
 
 SRCS	:= src/main.c src/parse.c src/create_struc.c \
 			src/index.c src/position.c src/push.c src/swap.c \
-			src/rotate.c src/rev_rotate.c src/fill_b.c \
+			src/rotate.c src/rev_rotate.c src/fill_b.c src/error.c \
 			src/print_funcs.c
 
 OBJS	:= ${SRCS:.c=.o}

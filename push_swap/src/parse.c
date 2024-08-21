@@ -6,31 +6,31 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:48:00 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/14 20:12:14 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:15:55 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	ft_numeric_args(char **ptr)
+int	ft_numeric_args(t_data *data)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	while (ptr[i])
+	while (data->arg[i])
 	{
-		if (ptr[i][j] == '+' || ptr[i][j] == '-')
+		if (data->arg[i][j] == '+' || data->arg[i][j] == '-')
 		{
 			j++;
-			if (ptr[i][j] == '<')
-				return (0);
+			if (data->arg[i][j] == '<')
+				ft_error("Non valid args included\n", data);
 		}
-		while (ptr[i][j])
+		while (data->arg[i][j])
 		{
-			if (!ft_isdigit(ptr[i][j]))
-				return (0);
+			if (!ft_isdigit(data->arg[i][j]))
+				ft_error("Error. Non valid args included\n", data);
 			j++;
 		}
 		j = 0;
@@ -39,38 +39,42 @@ int	ft_numeric_args(char **ptr)
 	return (1);
 }
 
-int	*ft_convert(char **ptr)
+int	*ft_convert(t_data *data)
 {
-	int	i;
-	int	j;
-	int	*nums;
+	int		i;
+	int		*nums;
 
 	i = 0;
-	while (ptr[i])
+	while (data->arg[i])
 		i++;
+	data->count = i;
 	nums = malloc(sizeof(int) * i);
-	j = 0;
-	while (j < i)
+	if (!nums)
+		ft_error("Int malloc error\n", data);
+	i = 0;
+	while (i < data->count)
 	{
-		nums[j] = ft_atoi(ptr[j]);
-		j++;
+		nums[i] = ft_atoi_magic(data->arg[i], data);
+		i++;
 	}
 	return (nums);
 }
 
-int	ft_unique(int *nums)
+int	ft_unique(t_data *data)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 1;
-	while (nums[i] && nums[j])
+	if (data->count == 2)
+		return (1);
+	while (i < data->count - 1)
 	{
-		while (nums[j])
+		while (j < data->count)
 		{
-			if (nums[i] == nums[j])
-				return (0);
+			if (data->nums[i] == data->nums[j])
+				ft_error("Error. Repeated values introduced\n", data);
 			j++;
 		}
 		i++;
@@ -79,10 +83,10 @@ int	ft_unique(int *nums)
 	return (1);
 }
 
-int	ft_atoi_magic(const char *str)
+int	ft_atoi_magic(const char *str, t_data *data)
 {
-	int	num;
-	int	sign;
+	long	num;
+	long	sign;
 	int	i;
 
 	num = 0;
@@ -98,8 +102,10 @@ int	ft_atoi_magic(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		if ((num * sign) < (-__INT_MAX__ - 1) || (num * sign) > __INT_MAX__)
+			ft_error("Number out of range\n", data);
 		num = (num * 10) + (str[i] - 48);
 		i++;
 	}
-	return (num * sign);
+	return ((int)(num * sign));
 }

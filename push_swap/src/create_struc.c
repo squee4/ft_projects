@@ -6,19 +6,19 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:50 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/13 21:43:32 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:22:22 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_node	*ft_new_node(int value)
+t_node	*ft_new_node(int value, t_data *data)
 {
 	t_node	*node;
 
 	node = ft_calloc(1, sizeof(*node));
 	if (!node)
-		return (0);
+		ft_error("Node malloc error\n", data);
 	node->value = value;
 	node->index = -1;
 	node->target = -1;
@@ -34,8 +34,13 @@ void	ft_add_node_top(t_node **stack, t_node *new)
 	*stack = new;
 }
 
-void	ft_stack_a(t_node **stack, int *nums, int len)
+void	ft_stack_a(t_data *data)
 {
+	int	len;
+	int	*nums;
+	
+	len = data->count - 1;
+	nums = data->nums;
 	while (len >= 0)
-		ft_add_node_top(stack, ft_new_node(nums[len--]));
+		ft_add_node_top(&data->s_a, ft_new_node(nums[len--], data));
 }
