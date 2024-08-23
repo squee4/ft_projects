@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 14:48:00 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/21 19:15:55 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/24 00:56:00 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ int	ft_numeric_args(t_data *data)
 	j = 0;
 	while (data->arg[i])
 	{
+		if (!data->arg[i][j])
+			ft_error("Error\n", data);
 		if (data->arg[i][j] == '+' || data->arg[i][j] == '-')
 		{
 			j++;
-			if (data->arg[i][j] == '<')
-				ft_error("Non valid args included\n", data);
+			if (!data->arg[i][j])
+				ft_error("Error\n", data);
 		}
 		while (data->arg[i][j])
 		{
 			if (!ft_isdigit(data->arg[i][j]))
-				ft_error("Error. Non valid args included\n", data);
+				ft_error("Error\n", data);
 			j++;
 		}
 		j = 0;
@@ -50,7 +52,7 @@ int	*ft_convert(t_data *data)
 	data->count = i;
 	nums = malloc(sizeof(int) * i);
 	if (!nums)
-		ft_error("Int malloc error\n", data);
+		ft_error("Error\n", data);
 	i = 0;
 	while (i < data->count)
 	{
@@ -67,14 +69,12 @@ int	ft_unique(t_data *data)
 
 	i = 0;
 	j = 1;
-	if (data->count == 2)
-		return (1);
 	while (i < data->count - 1)
 	{
 		while (j < data->count)
 		{
 			if (data->nums[i] == data->nums[j])
-				ft_error("Error. Repeated values introduced\n", data);
+				ft_error("Error\n", data);
 			j++;
 		}
 		i++;
@@ -87,7 +87,7 @@ int	ft_atoi_magic(const char *str, t_data *data)
 {
 	long	num;
 	long	sign;
-	int	i;
+	int		i;
 
 	num = 0;
 	sign = 1;
@@ -102,10 +102,10 @@ int	ft_atoi_magic(const char *str, t_data *data)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if ((num * sign) < (-__INT_MAX__ - 1) || (num * sign) > __INT_MAX__)
-			ft_error("Number out of range\n", data);
 		num = (num * 10) + (str[i] - 48);
 		i++;
+		if ((num * sign) < (-__INT_MAX__ - 1) || (num * sign) > __INT_MAX__)
+			ft_error("Error\n", data);
 	}
 	return ((int)(num * sign));
 }

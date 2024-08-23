@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 22:37:18 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/23 22:24:09 by ijerruz-         ###   ########.fr       */
+/*   Created: 2024/08/23 21:46:33 by ijerruz-          #+#    #+#             */
+/*   Updated: 2024/08/23 22:14:41 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	main(int argc, char **argv)
+void	ft_start(int argc, char **argv, t_data *data)
 {
-	t_data	data;
-
-	ft_start(argc, argv, &data);
-	if (ft_numeric_args(&data))
-		data.nums = ft_convert(&data);
-	if (ft_unique(&data))
-		ft_stack_a(&data);
-	if (ft_is_sorted(data.s_a))
-		ft_finish(&data);
-	ft_sorting_algo(&data);
-	ft_finish(&data);
+	memset(data, 0, sizeof(t_data));
+	if (argc == 2)
+	{
+		if (!argv[1][0])
+			ft_error("Error\n", data);
+		data->arg = ft_split(argv[1], ' ');
+		data->count = words(argv[1], ' ');
+		data->alloc = 1;
+	}
+	else if (argc != 1)
+	{
+		data->arg = argv + 1;
+		data->count = argc - 1;
+	}
+	else
+		ft_error("Error\n", data);
 }

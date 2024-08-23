@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:12:00 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/14 21:05:34 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/24 00:57:41 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,45 @@
 
 void	ft_sort_a(t_node **a, t_data *data)
 {
-	if ((*a)->next->index == data->count - 1)
-		ft_rev_rotate(a, 1);
-	if ((*a)->index == data->count - 1)
-		ft_rotate(a, 1);
-	if ((*a)->index == data->count - 2)
-		ft_swap(a, 1);
+	if (data->count == 2)
+	{
+		if ((*a)->index == 1)
+			ft_swap(a, 1);
+	}
+	else if (data->count > 2)
+	{
+		if ((*a)->next->index == data->count - 1)
+			ft_rev_rotate(a, 1);
+		if ((*a)->index == data->count - 1)
+			ft_rotate(a, 1);
+		if ((*a)->index == data->count - 2)
+			ft_swap(a, 1);
+	}
 }
 
-void	ft_fill_b(t_node **a, t_node **b, t_data *data)
+void	ft_fill_b(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (data->count > 3)
 	{
 		while (i < (data->count - 3))
 		{
-			if ((*a)->index == i)
+			if ((i < data->count / 2) && (data->s_a->index < data->count / 2))
 			{
-				ft_push(b, a, 2);
+				ft_push_b(data, 1);
+				i++;
+			}
+			else if ((i >= data->count / 2) && (i < (data->count - 3))
+				&& data->s_a->index < (data->count - 3))
+			{
+				ft_push_b(data, 1);
 				i++;
 			}
 			else
-				ft_rotate(a, 1);
+				ft_rotate(&data->s_a, 1);
 		}
 	}
-	ft_sort_a(a, data);
-	i = 0;
-/* 	while (i < data->count - 3)
-	{
-		ft_push(a, b, 1);
-		i++;
-	} */
+	ft_sort_a(&data->s_a, data);
 }

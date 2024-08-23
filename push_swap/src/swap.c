@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 22:20:35 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/14 20:40:14 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/23 23:56:15 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ void	ft_swap(t_node **stack, int p)
 	}
 }
 
-void	ft_swap_double(t_node **sa, t_node **sb)
+void	ft_swap_double(t_node **sa, t_node **sb, int p)
 {
 	ft_swap(sa, 0);
-	ft_swap(sb, 3);
+	if (p)
+		ft_swap(sb, 3);
+	else
+		ft_swap(sb, 0);
 }

@@ -6,12 +6,12 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 22:41:00 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/21 19:22:03 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/24 00:55:18 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP
-# define PUSH_SWAP
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <limits.h>
 # include "libft/libft.h"
@@ -22,9 +22,9 @@ typedef struct s_node
 	int				index;
 	int				target;
 	int				cost;
-	int				pos;
+	int				tcost;
 	struct s_node	*next;
-} t_node;
+}	t_node;
 
 typedef struct s_data
 {
@@ -33,9 +33,10 @@ typedef struct s_data
 	int		count;
 	int		size_a;
 	int		size_b;
+	int		alloc;
 	t_node	*s_a;
 	t_node	*s_b;
-} t_data;
+}	t_data;
 
 //parsing
 int		ft_numeric_args(t_data *data);
@@ -48,28 +49,34 @@ t_node	*ft_new_node(int value, t_data *data);
 void	ft_add_node_top(t_node **stack, t_node *new);
 void	ft_stack_a(t_data *data);
 void	ft_index(t_data *data, t_node **stack);
-void	ft_set_pos(t_node **stack);
 void	ft_sort_a(t_node **a, t_data *data);
+int		ft_is_sorted(t_node *node);
+void	ft_start(int argc, char **argv, t_data *data);
 
 //push_swap
-void	ft_fill_b(t_node **a, t_node **b, t_data *data);
+void	ft_fill_b(t_data *data);
+void	ft_set_cost(t_node **stack, int size);
+void	ft_set_target_b(t_node **stackb, t_node *stacka);
+void	ft_set_tcost(t_node **stackb, t_node *stacka);
+void	ft_sorting_algo(t_data *data);
+void	ft_move(int a, int b, t_data *data);
 
 //error
 void	ft_error(char *msg, t_data *data);
 void	ft_free_stack(t_node **node);
+void	ft_finish(t_data *data);
 
 //movements
-void	ft_push(t_node **dest, t_node **src, int p);
+void	ft_push_a(t_data *data, int p);
+void	ft_push_b(t_data *data, int p);
 void	ft_swap(t_node **stack, int p);
 void	ft_rotate(t_node **stack, int p);
 void	ft_rev_rotate(t_node **stack, int p);
-void	ft_swap_double(t_node **sa, t_node **sb);
+void	ft_swap_double(t_node **sa, t_node **sb, int p);
 void	ft_rotate_double(t_node **sa, t_node **sb, int p);
-void	ft_rev_rotate_double(t_node **sa, t_node **sb);
+void	ft_rev_rotate_double(t_node **sa, t_node **sb, int p);
 
-//debugging
-void	ft_print_values(t_node *list);
-void	ft_print_indexes(t_node *list);
-void	ft_print_pos(t_node *list);
+//bonus
+char	*get_next_line(int fd);
 
 #endif

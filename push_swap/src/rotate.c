@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:38:49 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/14 19:46:08 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/24 00:03:14 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ void	ft_rotate(t_node **stack, int p)
 		write(1, "ra\n", 3);
 	else if (p == 2)
 		write(1, "rb\n", 3);
+	else if (p == 3)
+		write(1, "rr\n", 3);
 }
 
 void	ft_rotate_double(t_node **sa, t_node **sb, int p)
 {
 	ft_rotate(sa, 0);
-	ft_rotate(sb, 0);
 	if (p)
-		write(1, "rr\n", 3);
+		ft_rotate(sb, 3);
+	else
+		ft_rotate(sb, 0);
 }

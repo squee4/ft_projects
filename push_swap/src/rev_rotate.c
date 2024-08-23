@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 23:38:35 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/14 20:39:33 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/08/24 00:04:22 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ void	ft_rev_rotate(t_node **stack, int p)
 	}
 }
 
-void	ft_rev_rotate_double(t_node **sa, t_node **sb)
+void	ft_rev_rotate_double(t_node **sa, t_node **sb, int p)
 {
 	ft_rev_rotate(sa, 0);
-	ft_rev_rotate(sb, 3);
+	if (p)
+		ft_rev_rotate(sb, 3);
+	else
+		ft_rev_rotate(sb, 0);
 }
