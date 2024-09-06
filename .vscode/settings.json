@@ -20,5 +20,6 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"random": "c"
-	}
+	},
+	"cmake.ignoreCMakeListsMissing": true
 }

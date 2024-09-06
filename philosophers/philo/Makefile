@@ -1,10 +1,10 @@
 NAME	= philo
 
-CFLAGS	=  -Wall -Werror -Wextra \
-	#-g -fsanitize=address,undefined \
-	#-Wunreachable-code -Ofast 
+CFLAGS	=  -Wall -Werror -Wextra -g -fsanitize=address
+#-Wunreachable-code -Ofast 
 
-SRCS	= src/main.c src/ft_atoi.c
+SRCS	= src/main.c src/ft_nums.c src/error.c src/parse.c \
+		src/init.c src/time.c src/exec.c
 
 OBJS	= ${SRCS:.c=.o}
 
