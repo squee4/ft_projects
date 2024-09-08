@@ -69,7 +69,6 @@ void	*ft_routine(void *philo)
 		ft_act(start, p->id, 1, p->t_eat);
 		p->last_meal = ft_get_time();
 		ft_act(start, p->id, 2, p->t_sleep);
-		ft_act(start, p->id, 3, p->t_eat);
 		if ((ft_get_time() - p->last_meal) >= p->t_die)
 		{
 			ft_lock_unlock(&p->table->write_lock, p->my_fork, p->r_fork, 0);
@@ -77,6 +76,7 @@ void	*ft_routine(void *philo)
 			p->table->death = 1;
 			break;
 		}
+		ft_act(start, p->id, 3, p->t_eat);
 		ft_lock_unlock(&p->table->write_lock, p->my_fork, p->r_fork, 0);
 	}
 	return ((void *)0);

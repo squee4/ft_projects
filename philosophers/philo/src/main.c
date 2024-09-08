@@ -23,15 +23,9 @@ int	main(int argc, char **argv)
 	{
 		ft_serve_table(&table, argv + 1);
 		ft_create_philos(philo, &table);
-		i = 0;
-		while (i < 1)
-		{
-			p = &philo[i];
-			pthread_create(&p->thread, NULL, ft_routine, (void *) p);
-			i++;
-		}
-		pthread_join(philo[0].thread, NULL);
-		//return (ft_finish(&table, philo), 1);
+		//ft_start_routine(philo);
 	}
+	//ft_join_philos(philo);
+	ft_finish(&table, philo);
 	return (0);
 }
