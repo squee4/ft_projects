@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 15:58:52 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/09/06 15:34:45 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:02:51 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ typedef struct s_table
 {
 	int				death;
 	int				count;
-	int				t_die;
-	int				t_eat;
-	int				t_sleep;
+	long			t_die;
+	long			t_eat;
+	long			t_sleep;
 	int				eat_times;
+	int				phinish;
 	long			start_time;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	fork[200];
@@ -40,36 +41,39 @@ typedef struct s_philo
 	pthread_mutex_t	*my_fork;
 	pthread_mutex_t	*r_fork;
 	int				count;
-	int				t_die;
-	int				t_eat;
-	int				t_sleep;
+	long			t_die;
+	long			t_eat;
+	long			t_sleep;
 	int				eat_times;
 	long			last_meal;
 	int				meals_taken;
 	t_table			*table;
 }	t_philo;
 
-// PARSING
+// LIB
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *str);
-int		ft_valid_args(char **argv, int i, int j);
+
+// PARSING
+int		ft_valid_args(char **argv);
 
 // START
 void	ft_serve_table(t_table *table, char **argv);
 void	ft_create_philos(t_philo *philo, t_table *table);
 
 //EXEC
-void*	ft_routine(void *vphilo);
-int		ft_lock_unlock(pthread_mutex_t *w, pthread_mutex_t *f1,
-pthread_mutex_t *f2, int mode);
-void	ft_act(long start, int id, int action, long pause);
-
+void	*ft_routine(void *philo);
+int		ft_lock(t_philo *philo);
+void	ft_unlock(t_philo *philo);
+int		ft_act(t_philo *philo, char *msg, long pause);
+void	ft_start_routine(t_philo philo[]);
 
 //TIME
 long	ft_get_time(void);
-int		ft_usleep(long ms);
+int		ft_usleep(long ms, t_philo *philo);
 
-// ERROR
-void	ft_finish(t_table *table, t_philo philo[]);
+// FINISH
+void	ft_finish(t_table *table);
 
 #endif

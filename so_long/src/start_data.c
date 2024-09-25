@@ -6,7 +6,7 @@
 /*   By: ijerruz- <ijerruz-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 05:43:04 by ijerruz-          #+#    #+#             */
-/*   Updated: 2024/08/07 21:29:45 by ijerruz-         ###   ########.fr       */
+/*   Updated: 2024/09/24 19:06:27 by ijerruz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_dimension_player(t_data *data)
 	j = 0;
 	while (data->map[i])
 	{
-		while (data->map[i][j])
+		while (data->map[i][j] != 0)
 		{
 			if (data->map[i][j] == 'P')
 			{
